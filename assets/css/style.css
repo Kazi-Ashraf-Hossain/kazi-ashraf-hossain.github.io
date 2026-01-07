@@ -306,7 +306,10 @@ main {
   min-width: 259px;
 }
 
-
+article {
+  height: 50svh; 
+  overflow-y: scroll;
+}
 
 
 
@@ -457,7 +460,7 @@ main {
 .navbar {
   position: fixed;
   bottom: 0;
-  left: 0;
+  left: 39% !important;
   width: 100%;
   background: hsla(240, 1%, 17%, 0.75);
   backdrop-filter: blur(10px);
@@ -1375,7 +1378,7 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .navbar { border-radius: 20px 20px 0 0; }
 
-  .navbar-list { gap: 20px; }
+  .navbar-list { gap: 10px; }
 
   .navbar-link { --fs-8: 14px; }
 
@@ -1711,7 +1714,7 @@ textarea.form-input::-webkit-resizer { display: none; }
   }
 
   .navbar-list {
-    gap: 30px;
+    gap: 15px;
     padding: 0 20px;
   }
 
@@ -1854,9 +1857,10 @@ textarea.form-input::-webkit-resizer { display: none; }
   .contacts-list { grid-template-columns: 1fr; }
 
   .contact-info :is(.contact-link) {
-    white-space: nowrap;
+    /* white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
+    text-overflow: ellipsis; */
+    word-wrap: break-word;
   }
 
   .contact-info :is(.contact-link, time, address) {
@@ -1866,7 +1870,7 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .separator:last-of-type {
     margin: 15px 0;
-    opacity: 0;
+    opacity: 1;
   }
 
   .social-list { justify-content: center; }
@@ -1879,4 +1883,22 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .timeline-text { max-width: 700px; }
 
+}
+
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 2px !important;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
