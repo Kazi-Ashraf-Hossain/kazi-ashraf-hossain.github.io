@@ -332,6 +332,7 @@ article {
   justify-content: flex-start;
   align-items: center;
   gap: 15px;
+  flex-wrap: wrap;
 }
 
 .avatar-box {
@@ -355,6 +356,51 @@ article {
   width: max-content;
   padding: 3px 12px;
   border-radius: 8px;
+}
+
+.info-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.info-content .name {
+  color: var(--white-2);
+  font-size: var(--fs-3);
+  font-weight: var(--fw-500);
+  letter-spacing: -0.25px;
+  margin: 0;
+}
+
+.info-content .title {
+  color: var(--white-1);
+  background: var(--onyx);
+  font-size: var(--fs-8);
+  font-weight: var(--fw-300);
+  width: max-content;
+  padding: 3px 12px;
+  border-radius: 8px;
+  margin: 0;
+}
+
+.info-content .name {
+  color: var(--white-2);
+  font-size: var(--fs-3);
+  font-weight: var(--fw-500);
+  letter-spacing: -0.25px;
+  margin-bottom: 10px;
+}
+
+.info-content .title {
+  color: var(--white-1);
+  background: var(--onyx);
+  font-size: var(--fs-8);
+  font-weight: var(--fw-300);
+  width: max-content;
+  padding: 3px 12px;
+  border-radius: 8px;
+  margin-bottom: 0;
 }
 
 .info_more-btn {
@@ -416,6 +462,7 @@ article {
 .contact-info {
   max-width: calc(100% - 46px);
   width: calc(100% - 46px);
+  overflow: hidden;
 }
 
 .contact-title {
@@ -431,6 +478,44 @@ article {
 }
 
 .contact-info address { font-style: normal; }
+
+/* Specific styles for email scrolling */
+.contact-item .contact-info {
+  overflow: hidden;
+}
+
+.contact-item .contact-link.email-scroll {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Ensure scrolling container takes full width */
+.contact-item .scrolling-container {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.contact-item .scrolling-text {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scrollText 8s linear infinite;
+  padding-right: 10px;
+}
+
+/* Pause on hover */
+.contact-item .scrolling-container:hover .scrolling-text {
+  animation-play-state: paused;
+}
+
+/* No animation for short emails */
+.contact-item .scrolling-text.short {
+  animation: none;
+  padding-right: 0;
+}
 
 .social-list {
   display: flex;
@@ -1368,6 +1453,26 @@ textarea.form-input::-webkit-resizer { display: none; }
   .contact-info {
     max-width: calc(100% - 64px);
     width: calc(100% - 64px);
+    overflow: hidden;
+  }
+
+  .experience-pill {
+    font-size: 12px;
+    padding: 6px 12px;
+    margin-top: 10px;
+  }
+
+  .experience-pill::after {
+    font-size: 11px;
+    padding: 8px 12px;
+  }
+
+  .scrolling-text {
+    font-size: 14px;
+  }
+
+  .contact-link {
+    font-size: 14px;
   }
 
 
@@ -1863,9 +1968,32 @@ textarea.form-input::-webkit-resizer { display: none; }
     word-wrap: break-word;
   }
 
+  .experience-pill {
+    margin: 15px auto 0;
+    font-size: 13px;
+    padding: 8px 16px;
+  }
+
+  .info-content {
+    align-items: center;
+    text-align: center;
+  }
+
+  .info-content .name {
+    text-align: center;
+  }
+
+  .info-content .title {
+    margin: 0 auto;
+  }
+
   .contact-info :is(.contact-link, time, address) {
     --fs-7: 14px;
     font-weight: var(--fw-300);
+  }
+
+  .contact-info {
+    overflow: hidden;
   }
 
   .separator:last-of-type {
@@ -1874,6 +2002,14 @@ textarea.form-input::-webkit-resizer { display: none; }
   }
 
   .social-list { justify-content: center; }
+
+  .scrolling-text {
+    font-size: 14px;
+  }
+
+  .contact-link {
+    font-size: 14px;
+  }
 
 
 
@@ -3632,6 +3768,166 @@ article::-webkit-scrollbar-thumb:hover {
 }
 
 /*-----------------------------------*\
+  #EXPERIENCE PILL
+\*-----------------------------------*/
+
+.experience-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  background: linear-gradient(135deg, var(--onyx), var(--eerie-black-1));
+  border-radius: 20px;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.1);
+  margin-top: 8px;
+  font-size: 11px;
+  color: var(--white-2);
+  font-weight: 500;
+  white-space: nowrap;
+  animation: fadeIn 0.5s ease-in;
+  transition: all 0.3s ease;
+  cursor: default;
+  position: relative;
+  z-index: 2;
+}
+
+.experience-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
+  border-color: rgba(255, 215, 0, 0.5);
+}
+
+.experience-pill svg {
+  filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.3));
+  transition: transform 0.3s ease;
+}
+
+.experience-pill:hover svg {
+  transform: scale(1.2) rotate(10deg);
+  filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.5));
+}
+
+/* Tooltip for experience pill */
+.experience-pill::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--eerie-black-2);
+  color: var(--white-2);
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 10px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.experience-pill:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-2px);
+}
+
+/* Mobile tooltip - show on tap */
+@media (hover: none) and (pointer: coarse) {
+  .experience-pill:active::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-2px);
+  }
+}
+
+/*-----------------------------------*\
+  #SCROLLING EMAIL
+\*-----------------------------------*/
+
+.email-scroll {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  max-width: 100%;
+  vertical-align: bottom;
+}
+
+.email-scroll.scrolling {
+  animation: scrollText 8s linear infinite;
+  padding-right: 20px;
+}
+
+.email-scroll::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 100%;
+  background: linear-gradient(to right, transparent, var(--eerie-black-1));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.email-scroll.scrolling::after {
+  opacity: 1;
+}
+
+/* Scrolling text container for email */
+.scrolling-container {
+  display: inline-block;
+  overflow: hidden;
+  max-width: 100%;
+  vertical-align: bottom;
+}
+
+.scrolling-text {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scrollText 8s linear infinite;
+  padding-right: 10px;
+  font-size: 14px;
+  color: var(--white-2);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.scrolling-text:hover {
+  color: var(--orange-yellow-crayola);
+}
+
+/* Pause scrolling on hover */
+.scrolling-container:hover .scrolling-text {
+  animation-play-state: paused;
+}
+
+/* Ensure contact link styling is preserved */
+.contact-link {
+  color: var(--white-2);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.contact-link:hover {
+  color: var(--orange-yellow-crayola);
+}
+
+/* Specific styling for email links */
+.contact-link.email-scroll {
+  color: var(--white-2);
+  text-decoration: none;
+}
+
+.contact-link.email-scroll:hover {
+  color: var(--orange-yellow-crayola);
+}
+
+/*-----------------------------------*\
   #FOOTER
 \*-----------------------------------*/
 
@@ -3805,6 +4101,25 @@ article::-webkit-scrollbar-thumb:hover {
   100% { left: 100%; }
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scrollText {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Fallback for browsers that don't support animation */
+@supports not (animation: scrollText) {
+  .scrolling-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .footer-development {
@@ -3824,6 +4139,11 @@ article::-webkit-scrollbar-thumb:hover {
     font-size: 11px;
   }
   
+  .experience-pill {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+  
   @keyframes typewriter {
     0%, 85%, 100% { width: 0; }
     25%, 65% { width: 40px; }
@@ -3838,5 +4158,50 @@ article::-webkit-scrollbar-thumb:hover {
   
   .footer-development span {
     margin: 1px 0;
+  }
+  
+  .experience-pill {
+    font-size: 9px;
+    padding: 3px 6px;
+  }
+  
+  .info-content {
+    align-items: center;
+    text-align: center;
+  }
+  
+  .info-content .title {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .experience-pill {
+    margin-top: 4px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .sidebar-info {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .info-content {
+    align-items: center;
+  }
+  
+  .scrolling-text {
+    font-size: 13px;
+  }
+
+  .contact-link {
+    font-size: 13px;
+  }
+
+  .experience-pill::after {
+    font-size: 10px;
+    padding: 6px 8px;
+    bottom: 130%;
   }
 }

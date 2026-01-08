@@ -70,6 +70,84 @@ document.addEventListener('DOMContentLoaded', function() {
       }, 1000);
     });
   }
+
+  // Scrolling email functionality
+  const emailLinks = document.querySelectorAll('.email-scroll');
+  emailLinks.forEach(emailLink => {
+    const email = emailLink.getAttribute('data-email');
+    
+    if (!email) return;
+    
+    // Check if email is long enough to need scrolling (more than 20 characters)
+    if (email.length > 20) {
+      // Create a container for scrolling
+      const container = document.createElement('span');
+      container.className = 'scrolling-container';
+      
+      // Create the scrolling text
+      const scrollingText = document.createElement('span');
+      scrollingText.className = 'scrolling-text';
+      scrollingText.textContent = email;
+      
+      // Replace the original link content
+      emailLink.textContent = '';
+      emailLink.appendChild(container);
+      container.appendChild(scrollingText);
+      
+      // Add hover effects to pause scrolling
+      emailLink.addEventListener('mouseenter', function() {
+        if (scrollingText) {
+          scrollingText.style.animationPlayState = 'paused';
+        }
+      });
+      
+      emailLink.addEventListener('mouseleave', function() {
+        if (scrollingText) {
+          scrollingText.style.animationPlayState = 'running';
+        }
+      });
+      
+      // Add click to copy functionality
+      emailLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        navigator.clipboard.writeText(email).then(() => {
+          // Show temporary feedback
+          const originalText = scrollingText.textContent;
+          scrollingText.textContent = 'Copied!';
+          scrollingText.style.color = '#50C878';
+          
+          setTimeout(() => {
+            scrollingText.textContent = originalText;
+            scrollingText.style.color = '';
+          }, 1500);
+        });
+      });
+    } else {
+      // For short emails, just add click to copy functionality
+      emailLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        navigator.clipboard.writeText(email).then(() => {
+          // Show temporary feedback
+          const originalText = emailLink.textContent;
+          emailLink.textContent = 'Copied!';
+          emailLink.style.color = '#50C878';
+          
+          setTimeout(() => {
+            emailLink.textContent = originalText;
+            emailLink.style.color = '';
+          }, 1500);
+        });
+      });
+    }
+  });
+
+  // Experience pill hover tooltip
+  const experiencePill = document.querySelector('.experience-pill');
+  if (experiencePill) {
+    experiencePill.addEventListener('mouseenter', function() {
+      this.title = '3+ years of professional experience in Software Quality Assurance';
+    });
+  }
 });
 
 // element toggle function
