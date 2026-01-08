@@ -1,6 +1,76 @@
 'use strict';
 
+// Footer functionality
+document.addEventListener('DOMContentLoaded', function() {
+  // Update copyright year
+  const copyrightYear = document.getElementById('copyright-year');
+  if (copyrightYear) {
+    copyrightYear.textContent = new Date().getFullYear();
+  }
 
+  // Add interactive effects for footer
+  const footer = document.querySelector('.footer');
+  const developerName = document.querySelector('.developer-name');
+  const heart = document.querySelector('.heart');
+  const techBadge = document.querySelector('.tech-badge');
+
+  // Enhanced hover effects
+  if (footer) {
+    footer.addEventListener('mouseenter', function() {
+      this.style.borderTopColor = '#FFD700';
+      this.style.transition = 'border-top-color 0.3s ease';
+    });
+    
+    footer.addEventListener('mouseleave', function() {
+      this.style.borderTopColor = 'var(--orange-yellow-crayola)';
+    });
+
+    // Click effect on footer
+    footer.addEventListener('click', function() {
+      this.style.transform = 'scale(0.98)';
+      setTimeout(() => {
+        this.style.transform = 'scale(1)';
+      }, 100);
+    });
+  }
+
+  // Developer name hover effect
+  if (developerName) {
+    developerName.addEventListener('mouseenter', function() {
+      this.style.animationDuration = '1s';
+    });
+    
+    developerName.addEventListener('mouseleave', function() {
+      this.style.animationDuration = '3s';
+    });
+  }
+
+  // Heart click effect
+  if (heart) {
+    heart.addEventListener('click', function() {
+      this.style.animation = 'none';
+      setTimeout(() => {
+        this.style.animation = 'heartbeat 1.2s ease-in-out infinite';
+      }, 10);
+      
+      // Create a temporary scale effect
+      this.style.transform = 'scale(1.5)';
+      setTimeout(() => {
+        this.style.transform = '';
+      }, 200);
+    });
+  }
+
+  // Tech badge click effect
+  if (techBadge) {
+    techBadge.addEventListener('click', function() {
+      this.style.animation = 'rotateText 1s linear infinite';
+      setTimeout(() => {
+        this.style.animation = 'rotateText 4s linear infinite';
+      }, 1000);
+    });
+  }
+});
 
 // element toggle function
 const elementToggleFunc = function (elem) { elem.classList.toggle("active"); }
