@@ -2030,6 +2030,66 @@ textarea.form-input::-webkit-resizer { display: none; }
     z-index: 1;
   }
 
+  /* Ensure carousel container properly centers images */
+  .project-modal-carousel-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s ease-in-out;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Enhanced image display for full visibility */
+  .project-modal-carousel-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    flex-shrink: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+    background: var(--jet);
+    padding: 15px;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .project-modal-carousel-container img.active {
+    opacity: 1;
+  }
+
+  /* Ensure images maintain aspect ratio and show full content */
+  .project-modal-carousel-container img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+    display: block;
+  }
+
+  /* Handle landscape images */
+  .project-modal-carousel-container img[alt*="landscape"] {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Handle portrait images */
+  .project-modal-carousel-container img[alt*="portrait"] {
+    width: auto;
+    height: 100%;
+  }
+
+  /* Ensure proper centering for all images */
+  .project-modal-carousel-container {
+    align-items: center;
+    justify-content: center;
+  }
+
   .project-modal-carousel:empty::after,
   .project-modal-carousel img[style*="display: none"]:only-child::after {
     content: "No images available";
@@ -2057,22 +2117,40 @@ textarea.form-input::-webkit-resizer { display: none; }
     height: 100%;
   }
 
-  /* Scrollbar styling for modal content */
+  /* Scrollbar styling for modal content - Slimmer scrollbars */
   .project-modal::-webkit-scrollbar {
-    width: 6px;
+    width: 3px;
   }
 
   .project-modal::-webkit-scrollbar-track {
     background: var(--eerie-black-1);
-    border-radius: 3px;
+    border-radius: 2px;
   }
 
   .project-modal::-webkit-scrollbar-thumb {
-    background: var(--jet);
-    border-radius: 3px;
+    background: var(--light-gray-70);
+    border-radius: 2px;
   }
 
   .project-modal::-webkit-scrollbar-thumb:hover {
+    background: var(--orange-yellow-crayola);
+  }
+
+  /* Slimmer scrollbars for project info section */
+  .project-modal-info::-webkit-scrollbar {
+    width: 2px;
+  }
+
+  .project-modal-info::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .project-modal-info::-webkit-scrollbar-thumb {
+    background: var(--light-gray-70);
+    border-radius: 1px;
+  }
+
+  .project-modal-info::-webkit-scrollbar-thumb:hover {
     background: var(--orange-yellow-crayola);
   }
 
@@ -2112,13 +2190,29 @@ textarea.form-input::-webkit-resizer { display: none; }
   .project-modal-carousel-container img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     flex-shrink: 0;
     position: absolute;
     top: 0;
     left: 0;
     opacity: 0;
     transition: opacity 0.4s ease-in-out;
+    background: var(--jet);
+    padding: 10px;
+  }
+
+  .project-modal-carousel-container img.active {
+    opacity: 1;
+  }
+
+  /* Ensure images maintain aspect ratio and show full content */
+  .project-modal-carousel-container img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    margin: auto;
+    display: block;
   }
 
   .project-modal-carousel-container img.active {
@@ -2167,7 +2261,148 @@ textarea.form-input::-webkit-resizer { display: none; }
   .carousel-prev { left: 15px; }
   .carousel-next { right: 15px; }
 
-  /* Show carousel buttons when needed */
+  /* Ensure carousel buttons are properly positioned over images */
+  .carousel-btn {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .carousel-btn:hover {
+    background: var(--orange-yellow-crayola);
+    color: var(--eerie-black-2);
+    transform: translateY(-50%) scale(1.1);
+    border-color: var(--orange-yellow-crayola);
+  }
+
+  .carousel-btn:active {
+    transform: translateY(-50%) scale(0.95);
+  }
+
+  .carousel-prev { left: 15px; }
+  .carousel-next { right: 15px; }
+
+  .carousel-counter {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    color: white;
+    font-weight: 600;
+    display: none; /* Hidden by default, shown via JS when needed */
+    z-index: 5;
+  }
+
+  .carousel-btn {
+    display: none; /* Hidden by default, shown via JS when needed */
+  }
+
+  /* Ensure carousel buttons are visible when there are multiple images */
+  .project-modal-carousel.has-multiple-images .carousel-btn {
+    display: flex;
+  }
+
+  .project-modal-carousel.has-multiple-images .carousel-counter {
+    display: block;
+  }
+
+  /* Ensure proper image display with full visibility */
+  .project-modal-carousel-container img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    background: var(--jet);
+    max-width: 100%;
+    max-height: 100%;
+    border: 1px solid rgba(255, 193, 7, 0.1);
+  }
+
+  /* Ensure carousel maintains proper aspect ratio */
+  .project-modal-carousel {
+    aspect-ratio: 16/9;
+    height: auto;
+    min-height: 300px;
+  }
+
+  /* Responsive adjustments for image display */
+  @media (max-width: 768px) {
+    .project-modal-carousel {
+      aspect-ratio: 4/3;
+      min-height: 250px;
+    }
+    
+    .project-modal-carousel-container img {
+      padding: 10px;
+    }
+
+    .carousel-btn {
+      width: 35px;
+      height: 35px;
+    }
+
+    .carousel-prev { left: 10px; }
+    .carousel-next { right: 10px; }
+  }
+
+  /* Ensure images are properly centered */
+  .project-modal-carousel-container {
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Handle very small screens */
+  @media (max-width: 480px) {
+    .project-modal-carousel {
+      aspect-ratio: 3/2;
+      min-height: 200px;
+    }
+    
+    .project-modal-carousel-container img {
+      padding: 8px;
+    }
+
+    .carousel-btn {
+      width: 30px;
+      height: 30px;
+      font-size: 14px;
+    }
+
+    .carousel-counter {
+      font-size: 11px;
+      padding: 4px 8px;
+      bottom: 10px;
+      right: 10px;
+    }
+  }
+
+  /* Ensure carousel buttons work well with full images */
+  .project-modal-carousel.has-multiple-images .carousel-btn {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .project-modal-carousel.has-multiple-images:hover .carousel-btn,
+  .project-modal-carousel.has-multiple-images:focus-within .carousel-btn,
+  .project-modal-carousel.has-multiple-images .carousel-btn:focus {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Always show on touch devices */
+  @media (hover: none) and (pointer: coarse) {
+    .project-modal-carousel.has-multiple-images .carousel-btn {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  /* Ensure proper visibility for carousel buttons when needed */
   .project-modal-carousel:hover .carousel-btn,
   .project-modal-carousel:focus-within .carousel-btn,
   .carousel-btn:focus {
@@ -2183,21 +2418,168 @@ textarea.form-input::-webkit-resizer { display: none; }
     }
   }
 
-  .carousel-counter {
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-size: 12px;
-    color: white;
-    font-weight: 600;
-    display: none; /* Hidden by default, shown via JS when needed */
+  /* Ensure carousel container properly handles full images */
+  .project-modal-carousel-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s ease-in-out;
+    position: relative;
+    align-items: center;
+    justify-content: center;
   }
 
-  .carousel-btn {
-    display: none; /* Hidden by default, shown via JS when needed */
+  /* Enhanced image display for full visibility */
+  .project-modal-carousel-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    flex-shrink: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+    background: var(--jet);
+    padding: 15px;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .project-modal-carousel-container img.active {
+    opacity: 1;
+  }
+
+  /* Ensure images maintain aspect ratio and show full content */
+  .project-modal-carousel-container img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+    display: block;
+  }
+
+  /* Ensure proper centering for all images */
+  .project-modal-carousel-container {
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Ensure carousel maintains proper aspect ratio */
+  .project-modal-carousel {
+    aspect-ratio: 16/9;
+    height: auto;
+    min-height: 300px;
+  }
+
+  /* Responsive adjustments for image display */
+  @media (max-width: 768px) {
+    .project-modal-carousel {
+      aspect-ratio: 4/3;
+      min-height: 250px;
+    }
+    
+    .project-modal-carousel-container img {
+      padding: 10px;
+    }
+
+    .carousel-btn {
+      width: 35px;
+      height: 35px;
+    }
+
+    .carousel-prev { left: 10px; }
+    .carousel-next { right: 10px; }
+  }
+
+  /* Handle very small screens */
+  @media (max-width: 480px) {
+    .project-modal-carousel {
+      aspect-ratio: 3/2;
+      min-height: 200px;
+    }
+    
+    .project-modal-carousel-container img {
+      padding: 8px;
+    }
+
+    .carousel-btn {
+      width: 30px;
+      height: 30px;
+      font-size: 14px;
+    }
+
+    .carousel-counter {
+      font-size: 11px;
+      padding: 4px 8px;
+      bottom: 10px;
+      right: 10px;
+    }
+  }
+
+  /* Ensure proper visibility for carousel buttons when needed */
+  .project-modal-carousel:hover .carousel-btn,
+  .project-modal-carousel:focus-within .carousel-btn,
+  .carousel-btn:focus {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Always show buttons on touch devices */
+  @media (hover: none) and (pointer: coarse) {
+    .carousel-btn {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  /* Ensure carousel container properly handles full images */
+  .project-modal-carousel-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s ease-in-out;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Enhanced image display for full visibility */
+  .project-modal-carousel-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    flex-shrink: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+    background: var(--jet);
+    padding: 15px;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .project-modal-carousel-container img.active {
+    opacity: 1;
+  }
+
+  /* Ensure images maintain aspect ratio and show full content */
+  .project-modal-carousel-container img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+    display: block;
+  }
+
+  /* Ensure proper centering for all images */
+  .project-modal-carousel-container {
+    align-items: center;
+    justify-content: center;
   }
 
   /* Modal Info Styles */
@@ -2844,6 +3226,35 @@ textarea.form-input::-webkit-resizer { display: none; }
     animation: loading 1.5s infinite;
   }
 
+  /* Ensure images are properly centered and visible */
+  .project-modal-carousel-container img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    background: var(--jet);
+    max-width: 100%;
+    max-height: 100%;
+    border: 1px solid rgba(255, 193, 7, 0.1);
+  }
+
+  /* Ensure carousel maintains aspect ratio */
+  .project-modal-carousel {
+    aspect-ratio: 16/9;
+    height: auto;
+  }
+
+  /* Responsive adjustments for image display */
+  @media (max-width: 768px) {
+    .project-modal-carousel {
+      aspect-ratio: 4/3;
+    }
+    
+    .project-modal-carousel-container img {
+      padding: 10px;
+    }
+  }
+
   /* Final performance optimization */
   .project-modal-container,
   .project-modal,
@@ -2956,13 +3367,6 @@ textarea.form-input::-webkit-resizer { display: none; }
     border: 1px solid rgba(255, 193, 7, 0.2);
   }
 
-  /* Ensure proper loading state */
-  .project-modal-carousel-container img.loading {
-    background: linear-gradient(90deg, #1A1A1A 25%, #2A2A2A 50%, #1A1A1A 75%);
-    background-size: 200% 100%;
-    animation: loading 1.5s infinite;
-  }
-
   /* Add subtle shadow to modal for depth */
   .project-modal {
     box-shadow: 
@@ -3033,14 +3437,196 @@ textarea.form-input::-webkit-resizer { display: none; }
 
 }
 
+/* Slimmer scrollbars for main content areas */
+.sidebar::-webkit-scrollbar,
+article::-webkit-scrollbar {
+  width: 3px;
+}
+
+.sidebar::-webkit-scrollbar-track,
+article::-webkit-scrollbar-track {
+  background: var(--eerie-black-1);
+  border-radius: 2px;
+}
+
+.sidebar::-webkit-scrollbar-thumb,
+article::-webkit-scrollbar-thumb {
+  background: var(--light-gray-70);
+  border-radius: 2px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover,
+article::-webkit-scrollbar-thumb:hover {
+  background: var(--orange-yellow-crayola);
+}
+
+/* Slimmer scrollbars for testimonials and clients lists */
+.testimonials-list::-webkit-scrollbar,
+.clients-list::-webkit-scrollbar {
+  height: 2px;
+}
+
+.testimonials-list::-webkit-scrollbar-track,
+.clients-list::-webkit-scrollbar-track {
+  background: var(--eerie-black-1);
+  border-radius: 1px;
+}
+
+.testimonials-list::-webkit-scrollbar-thumb,
+.clients-list::-webkit-scrollbar-thumb {
+  background: var(--light-gray-70);
+  border-radius: 1px;
+}
+
+.testimonials-list::-webkit-scrollbar-thumb:hover,
+.clients-list::-webkit-scrollbar-thumb:hover {
+  background: var(--orange-yellow-crayola);
+}
+
+/* Global slim scrollbar styles */
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+
+/* Final optimizations for image display */
+.project-modal-carousel-container img {
+  object-fit: contain !important;
+  width: 100% !important;
+  height: 100% !important;
+  padding: 15px !important;
+  background: var(--jet) !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+}
+
+/* Ensure carousel maintains proper aspect ratio */
+.project-modal-carousel {
+  aspect-ratio: 16/9;
+  height: auto;
+  min-height: 300px;
+}
+
+/* Responsive adjustments for image display */
+@media (max-width: 768px) {
+  .project-modal-carousel {
+    aspect-ratio: 4/3;
+    min-height: 250px;
+  }
+  
+  .project-modal-carousel-container img {
+    padding: 10px !important;
+  }
+
+  .carousel-btn {
+    width: 35px;
+    height: 35px;
+  }
+
+  .carousel-prev { left: 10px; }
+  .carousel-next { right: 10px; }
+}
+
+/* Handle very small screens */
+@media (max-width: 480px) {
+  .project-modal-carousel {
+    aspect-ratio: 3/2;
+    min-height: 200px;
+  }
+  
+  .project-modal-carousel-container img {
+    padding: 8px !important;
+  }
+
+  .carousel-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+
+  .carousel-counter {
+    font-size: 11px;
+    padding: 4px 8px;
+    bottom: 10px;
+    right: 10px;
+  }
+}
+
+/* Ensure proper visibility for carousel buttons when needed */
+.project-modal-carousel:hover .carousel-btn,
+.project-modal-carousel:focus-within .carousel-btn,
+.carousel-btn:focus {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Always show buttons on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .carousel-btn {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* Ensure carousel container properly handles full images */
+.project-modal-carousel-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease-in-out;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Enhanced image display for full visibility */
+.project-modal-carousel-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  flex-shrink: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+  background: var(--jet);
+  padding: 15px;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.project-modal-carousel-container img.active {
+  opacity: 1;
+}
+
+/* Ensure images maintain aspect ratio and show full content */
+.project-modal-carousel-container img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+  display: block;
+}
+
+/* Ensure proper centering for all images */
+.project-modal-carousel-container {
+  align-items: center;
+  justify-content: center;
+}
+
+/* Global scrollbar styles - Slimmer scrollbars */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: var(--eerie-black-1);
+  border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: var(--light-gray-70);
+  border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: var(--orange-yellow-crayola);
 }

@@ -471,6 +471,14 @@ const showProjectModal = function (projectTitle, sectionContext) {
         }
       };
       
+      // Ensure proper image display
+      img.onload = function() {
+        // Image loaded successfully, ensure it's displayed properly
+        this.style.display = "block";
+        // Remove any loading indicators
+        this.classList.remove("loading");
+      };
+      
       if (index === 0) img.classList.add("active");
       projectCarousel.appendChild(img);
     });
@@ -478,6 +486,13 @@ const showProjectModal = function (projectTitle, sectionContext) {
 
   // Update counter and navigation
   updateCarouselCounter();
+  
+  // Add class for multiple images
+  if (projectData.images && projectData.images.length > 1) {
+    projectCarousel.parentElement.classList.add("has-multiple-images");
+  } else {
+    projectCarousel.parentElement.classList.remove("has-multiple-images");
+  }
   
   // Check if all images are hidden (failed to load)
   setTimeout(() => {
@@ -496,6 +511,7 @@ const showProjectModal = function (projectTitle, sectionContext) {
       carouselCounter.style.display = "none";
       carouselPrev.style.display = "none";
       carouselNext.style.display = "none";
+      projectCarousel.parentElement.classList.remove("has-multiple-images");
     }
   }, 100);
 
@@ -566,6 +582,19 @@ const showGenericModal = function (projectTitle) {
   // Handle placeholder image error
   img.onerror = function() {
     this.style.display = "none";
+    // Show a message if no images available
+    projectCarousel.innerHTML = "";
+    projectCarousel.style.display = "flex";
+    projectCarousel.style.alignItems = "center";
+    projectCarousel.style.justifyContent = "center";
+    projectCarousel.style.color = "var(--light-gray-70)";
+    projectCarousel.style.fontSize = "14px";
+    projectCarousel.textContent = "No image available";
+  };
+  
+  // Ensure proper display
+  img.onload = function() {
+    this.style.display = "block";
   };
   
   projectCarousel.appendChild(img);
@@ -574,6 +603,11 @@ const showGenericModal = function (projectTitle) {
   carouselCounter.style.display = "none";
   carouselPrev.style.display = "none";
   carouselNext.style.display = "none";
+  
+  // Remove multiple images class
+  if (projectCarousel.parentElement) {
+    projectCarousel.parentElement.classList.remove("has-multiple-images");
+  }
 
   // Clear technologies and links
   projectTechnologies.innerHTML = "";
