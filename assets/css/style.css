@@ -1883,12 +1883,1154 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .timeline-text { max-width: 700px; }
 
-}
 
 
-::-webkit-scrollbar {
-  width: 6px;
-  height: 2px !important;
+  /**
+   * PROJECT MODAL
+   */
+
+  .project-modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all 0.3s ease;
+  }
+
+  .project-modal-container.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+  }
+
+  .project-modal-container .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .project-modal-container.active .overlay {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Overlay hover effect */
+  .project-modal-container .overlay:hover {
+    background: rgba(0, 0, 0, 0.9);
+  }
+
+  .project-modal {
+    position: relative;
+    background: var(--eerie-black-2);
+    border: 1px solid var(--jet);
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 800px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: scale(0.9);
+    opacity: 0;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-1);
+  }
+
+  .project-modal-container.active .project-modal {
+    transform: scale(1);
+    opacity: 1;
+    transition-delay: 0.1s;
+  }
+
+  /* Add subtle bounce animation for modal appearance */
+  @keyframes modalBounce {
+    0% { transform: scale(0.9); opacity: 0; }
+    50% { transform: scale(1.02); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  .project-modal-container.active .project-modal {
+    animation: modalBounce 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* Remove animation for reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .project-modal-container.active .project-modal {
+      animation: none;
+    }
+  }
+
+  .modal-close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: var(--jet);
+    border: none;
+    border-radius: 8px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--light-gray);
+    transition: all 0.3s ease;
+    z-index: 10;
+  }
+
+  .modal-close-btn:hover {
+    background: var(--orange-yellow-crayola);
+    color: var(--eerie-black-2);
+  }
+
+  .project-modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  /* Carousel Styles */
+  .project-modal-carousel {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    background: var(--jet);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--onyx);
+  }
+
+  .project-modal-carousel::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, transparent 0%, rgba(0,0,0,0.3) 100%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .project-modal-carousel:empty::after,
+  .project-modal-carousel img[style*="display: none"]:only-child::after {
+    content: "No images available";
+    color: var(--light-gray-70);
+    font-size: 14px;
+  }
+
+  /* Handle carousel with all images hidden */
+  .project-modal-carousel img[style*="display: none"] {
+    display: none !important;
+  }
+
+  .project-modal-carousel img:not([style*="display: none"]) {
+    display: block !important;
+  }
+
+  /* Message display in carousel */
+  .project-modal-carousel > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--light-gray-70);
+    font-size: 14px;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Scrollbar styling for modal content */
+  .project-modal::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .project-modal::-webkit-scrollbar-track {
+    background: var(--eerie-black-1);
+    border-radius: 3px;
+  }
+
+  .project-modal::-webkit-scrollbar-thumb {
+    background: var(--jet);
+    border-radius: 3px;
+  }
+
+  .project-modal::-webkit-scrollbar-thumb:hover {
+    background: var(--orange-yellow-crayola);
+  }
+
+  /* Focus styles for accessibility */
+  .modal-close-btn:focus,
+  .carousel-btn:focus,
+  .project-link-btn:focus {
+    outline: 2px solid var(--orange-yellow-crayola);
+    outline-offset: 2px;
+  }
+
+  /* Loading animation for images */
+  .project-modal-carousel-container img {
+    background: linear-gradient(90deg, var(--jet) 25%, var(--onyx) 50%, var(--jet) 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+  }
+
+  @keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  .project-modal-carousel-container img.active {
+    animation: none;
+    background: none;
+  }
+
+  .project-modal-carousel-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s ease-in-out;
+    position: relative;
+  }
+
+  .project-modal-carousel-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    flex-shrink: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+  }
+
+  .project-modal-carousel-container img.active {
+    opacity: 1;
+  }
+
+  /* Placeholder for missing images */
+  .project-modal-carousel-container img[src=""] {
+    background: var(--jet);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--light-gray);
+    font-size: 14px;
+  }
+
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+    transition: all 0.3s ease;
+    z-index: 5;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .carousel-btn:hover {
+    background: var(--orange-yellow-crayola);
+    color: var(--eerie-black-2);
+  }
+
+  .carousel-btn:active {
+    transform: translateY(-50%) scale(0.9);
+  }
+
+  .carousel-prev { left: 15px; }
+  .carousel-next { right: 15px; }
+
+  /* Show carousel buttons when needed */
+  .project-modal-carousel:hover .carousel-btn,
+  .project-modal-carousel:focus-within .carousel-btn,
+  .carousel-btn:focus {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Always show buttons on touch devices */
+  @media (hover: none) and (pointer: coarse) {
+    .carousel-btn {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  .carousel-counter {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    color: white;
+    font-weight: 600;
+    display: none; /* Hidden by default, shown via JS when needed */
+  }
+
+  .carousel-btn {
+    display: none; /* Hidden by default, shown via JS when needed */
+  }
+
+  /* Modal Info Styles */
+  .project-modal-info {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .modal-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--white-1);
+    line-height: 1.3;
+    background: var(--text-gradient-yellow);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .project-category-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    background: var(--jet);
+    border: 1px solid var(--orange-yellow-crayola);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--orange-yellow-crayola);
+    width: fit-content;
+    font-weight: 500;
+  }
+
+  .project-description {
+    color: var(--light-gray-70);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-top: 5px;
+  }
+
+  .project-technologies h4,
+  .project-links h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--white-1);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .project-technologies h4::before,
+  .project-links h4::before {
+    content: "";
+    width: 4px;
+    height: 14px;
+    background: var(--orange-yellow-crayola);
+    border-radius: 2px;
+  }
+
+  .technologies-list,
+  .links-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tech-tag {
+    padding: 6px 12px;
+    background: var(--jet);
+    border: 1px solid var(--orange-yellow-crayola);
+    border-radius: 6px;
+    font-size: 12px;
+    color: var(--orange-yellow-crayola);
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  .tech-tag:hover {
+    background: var(--orange-yellow-crayola);
+    color: var(--eerie-black-2);
+  }
+
+  .project-link-btn {
+    padding: 8px 14px;
+    background: transparent;
+    border: 1.5px solid var(--light-gray-70);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--light-gray-70);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+  }
+
+  .project-link-btn:hover {
+    border-color: var(--orange-yellow-crayola);
+    color: var(--orange-yellow-crayola);
+    background: rgba(255, 193, 7, 0.1);
+    transform: translateY(-2px);
+  }
+
+  /* Empty state styling */
+  .project-description:empty::after,
+  .technologies-list:empty::after,
+  .links-list:empty::after {
+    content: "Coming soon...";
+    color: var(--light-gray-70);
+    font-style: italic;
+    font-size: 13px;
+  }
+
+
+
+  /* Responsive adjustments for project modal */
+  @media (max-width: 768px) {
+    .project-modal {
+      padding: 20px;
+      width: 95%;
+      max-height: 95vh;
+    }
+
+    .project-modal-carousel {
+      height: 250px;
+    }
+
+    .modal-title {
+      font-size: 18px;
+    }
+
+    .project-modal-content {
+      gap: 20px;
+    }
+
+    .carousel-btn {
+      width: 35px;
+      height: 35px;
+    }
+
+    .carousel-prev { left: 10px; }
+    .carousel-next { right: 10px; }
+
+    .project-link-btn {
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+  }
+
+  /* Very small screens */
+  @media (max-width: 480px) {
+    .project-modal-carousel {
+      height: 200px;
+    }
+
+    .modal-title {
+      font-size: 16px;
+    }
+
+    .project-category-badge {
+      font-size: 12px;
+      padding: 5px 12px;
+    }
+
+    .project-description {
+      font-size: 13px;
+    }
+
+    .tech-tag {
+      font-size: 11px;
+      padding: 5px 10px;
+    }
+  }
+
+  /* Touch device optimizations */
+  @media (hover: none) and (pointer: coarse) {
+    .project-link-btn:hover,
+    .tech-tag:hover {
+      transform: none;
+    }
+
+    .project-link-btn:active,
+    .tech-tag:active {
+      transform: scale(0.95);
+      opacity: 0.8;
+    }
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .project-modal {
+      border: 2px solid var(--orange-yellow-crayola);
+    }
+
+    .project-category-badge {
+      border-width: 2px;
+    }
+
+    .project-link-btn {
+      border-width: 2px;
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .project-modal-container,
+    .project-modal,
+    .project-link-btn,
+    .tech-tag,
+    .carousel-btn {
+      transition: none;
+    }
+
+    .project-modal-carousel-container img {
+      transition: none;
+    }
+
+    .project-item:hover {
+      transform: none;
+    }
+  }
+
+  /* Focus visible styles for keyboard navigation */
+  .project-modal:focus-visible {
+    outline: 2px solid var(--orange-yellow-crayola);
+    outline-offset: 4px;
+  }
+
+  /* High performance rendering */
+  .project-modal-container,
+  .project-modal,
+  .project-modal-carousel,
+  .project-modal-carousel-container,
+  .project-modal-carousel-container img {
+    will-change: transform, opacity;
+  }
+
+  /* Ensure proper stacking context */
+  .project-modal-container {
+    isolation: isolate;
+  }
+
+  /* Print styles */
+  @media print {
+    .project-modal-container {
+      display: none !important;
+    }
+  }
+
+  /* Dark mode optimizations (if system preference changes) */
+  @media (prefers-color-scheme: dark) {
+    .project-modal {
+      background: var(--eerie-black-2);
+    }
+  }
+
+  /* Handle very long content */
+  .project-modal-info {
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 8px;
+  }
+
+  .project-modal-info::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .project-modal-info::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .project-modal-info::-webkit-scrollbar-thumb {
+    background: var(--jet);
+    border-radius: 2px;
+  }
+
+  /* Ensure proper spacing for empty sections */
+  .project-technologies:empty,
+  .project-links:empty {
+    display: none;
+  }
+
+  /* Add subtle glow effect to modal on hover */
+  .project-modal:hover {
+    box-shadow: 
+      0 25px 50px rgba(0, 0, 0, 0.5),
+      0 0 20px rgba(255, 193, 7, 0.15);
+  }
+
+  /* Ensure proper contrast for text */
+  .project-description,
+  .tech-tag,
+  .project-link-btn {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Add subtle gradient to modal background */
+  .project-modal {
+    background: 
+      linear-gradient(135deg, var(--eerie-black-2) 0%, var(--eerie-black-1) 100%);
+  }
+
+  /* Ensure proper spacing for long content */
+  .project-modal-info > *:not(:last-child) {
+    margin-bottom: 8px;
+  }
+
+  /* Add subtle border to carousel */
+  .project-modal-carousel {
+    border: 1px solid rgba(255, 193, 7, 0.2);
+  }
+
+  /* Ensure proper focus visibility */
+  .modal-close-btn:focus-visible,
+  .carousel-btn:focus-visible,
+  .project-link-btn:focus-visible {
+    outline: 2px solid var(--orange-yellow-crayola);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 4px rgba(255, 193, 7, 0.2);
+  }
+
+  /* Handle window resize gracefully */
+  @media (max-width: 1200px) {
+    .project-modal {
+      max-width: 700px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .project-modal {
+      max-width: 600px;
+    }
+  }
+
+  /* Ensure modal doesn't exceed viewport on very small screens */
+  @media (max-height: 600px) {
+    .project-modal {
+      max-height: 90vh;
+      padding: 15px;
+    }
+
+    .project-modal-carousel {
+      height: 200px;
+    }
+
+    .project-modal-info {
+      max-height: 250px;
+    }
+  }
+
+  /* Landscape orientation on mobile */
+  @media (max-width: 768px) and (orientation: landscape) {
+    .project-modal {
+      max-height: 95vh;
+      width: 95%;
+    }
+
+    .project-modal-carousel {
+      height: 200px;
+    }
+
+    .project-modal-content {
+      flex-direction: row;
+      gap: 20px;
+    }
+
+    .project-modal-carousel {
+      width: 45%;
+    }
+
+    .project-modal-info {
+      width: 55%;
+      max-height: 300px;
+    }
+  }
+
+  /* High DPI screen optimizations */
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .modal-title,
+    .project-category-badge,
+    .project-description,
+    .tech-tag,
+    .project-link-btn {
+      -webkit-font-smoothing: subpixel-antialiased;
+      text-rendering: geometricPrecision;
+    }
+  }
+
+  /* Print optimization - hide interactive elements */
+  @media print {
+    .project-modal-container {
+      display: none !important;
+    }
+  }
+
+  /* Add subtle pulse animation to close button when modal opens */
+  @keyframes closePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+
+  .project-modal-container.active .modal-close-btn {
+    animation: closePulse 0.6s ease-in-out 0.3s;
+  }
+
+  /* Remove animation for reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .project-modal-container.active .modal-close-btn {
+      animation: none;
+    }
+  }
+
+  /* Ensure proper contrast ratios for accessibility */
+  .modal-title {
+    color: #FFC107; /* Orange-yellow-crayola for better contrast */
+  }
+
+  .project-category-badge {
+    background: #2A2A2A; /* Slightly lighter than jet for better contrast */
+    border-color: #FFC107;
+    color: #FFC107;
+  }
+
+  .tech-tag {
+    background: #2A2A2A;
+    border-color: #FFC107;
+    color: #FFC107;
+  }
+
+  .project-link-btn {
+    border-color: #B0B0B0; /* Light-gray-70 equivalent */
+    color: #B0B0B0;
+  }
+
+  .project-link-btn:hover {
+    border-color: #FFC107;
+    color: #FFC107;
+    background: rgba(255, 193, 7, 0.15);
+  }
+
+  /* Ensure proper focus visibility for keyboard users */
+  .modal-close-btn:focus,
+  .carousel-btn:focus,
+  .project-link-btn:focus {
+    outline: 2px solid #FFC107;
+    outline-offset: 2px;
+  }
+
+  /* Add subtle shadow to project items for depth */
+  .project-item {
+    transition: all 0.3s ease;
+  }
+
+  .project-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Ensure proper spacing in the modal */
+  .project-modal-info > * {
+    margin-bottom: 12px;
+  }
+
+  .project-modal-info > *:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Add subtle border to carousel images */
+  .project-modal-carousel-container img {
+    border: 1px solid rgba(255, 193, 7, 0.1);
+  }
+
+  /* Ensure proper loading state */
+  .project-modal-carousel-container img.loading {
+    background: linear-gradient(90deg, #1A1A1A 25%, #2A2A2A 50%, #1A1A1A 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+  }
+
+  /* Final polish for the modal */
+  .project-modal {
+    border: 1px solid rgba(255, 193, 7, 0.15);
+    border-radius: 16px;
+  }
+
+  /* Ensure proper z-index stacking */
+  .project-modal-container {
+    z-index: 2000;
+  }
+
+  .project-modal {
+    z-index: 2001;
+  }
+
+  .modal-close-btn {
+    z-index: 2002;
+  }
+
+  .carousel-btn {
+    z-index: 2003;
+  }
+
+  .carousel-counter {
+    z-index: 2003;
+  }
+
+  /* Performance optimizations */
+  .project-modal-container,
+  .project-modal,
+  .project-modal-carousel,
+  .project-modal-carousel-container,
+  .project-modal-carousel-container img,
+  .modal-close-btn,
+  .carousel-btn,
+  .project-link-btn,
+  .tech-tag {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+
+  /* Ensure proper rendering order */
+  .project-modal-container {
+    contain: layout style paint;
+  }
+
+  .project-modal {
+    contain: content;
+  }
+
+  /* Optimize for touch devices */
+  @media (hover: none) and (pointer: coarse) {
+    .project-modal-container {
+      touch-action: manipulation;
+    }
+
+    .project-link-btn,
+    .tech-tag,
+    .modal-close-btn,
+    .carousel-btn {
+      min-height: 44px;
+      min-width: 44px;
+    }
+  }
+
+  /* Final polish for the modal */
+  .project-modal {
+    border: 1px solid rgba(255, 193, 7, 0.15);
+    border-radius: 16px;
+    background: linear-gradient(135deg, var(--eerie-black-2) 0%, var(--eerie-black-1) 100%);
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(255, 193, 7, 0.1);
+  }
+
+  .project-modal:hover {
+    box-shadow: 
+      0 25px 50px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(255, 193, 7, 0.2);
+  }
+
+  /* Ensure proper contrast for all text elements */
+  .modal-title {
+    color: #FFC107; /* Orange-yellow-crayola */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  }
+
+  .project-category-badge {
+    background: #2A2A2A;
+    border: 1px solid #FFC107;
+    color: #FFC107;
+    font-weight: 600;
+  }
+
+  .project-description {
+    color: #B0B0B0; /* light-gray-70 equivalent */
+    line-height: 1.6;
+  }
+
+  .tech-tag {
+    background: #2A2A2A;
+    border: 1px solid #FFC107;
+    color: #FFC107;
+    font-weight: 500;
+  }
+
+  .project-link-btn {
+    border: 1.5px solid #B0B0B0;
+    color: #B0B0B0;
+    font-weight: 500;
+  }
+
+  .project-link-btn:hover {
+    border-color: #FFC107;
+    color: #FFC107;
+    background: rgba(255, 193, 7, 0.15);
+  }
+
+  /* Ensure proper focus visibility */
+  .modal-close-btn:focus-visible,
+  .carousel-btn:focus-visible,
+  .project-link-btn:focus-visible {
+    outline: 2px solid #FFC107;
+    outline-offset: 3px;
+    box-shadow: 0 0 0 4px rgba(255, 193, 7, 0.2);
+  }
+
+  /* Add subtle animation to project items */
+  .project-item {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .project-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  }
+
+  .project-item .project-item-icon-box {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Ensure proper spacing in modal */
+  .project-modal-info > * {
+    margin-bottom: 12px;
+  }
+
+  .project-modal-info > *:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Add subtle border to carousel */
+  .project-modal-carousel {
+    border: 1px solid rgba(255, 193, 7, 0.2);
+  }
+
+  /* Ensure proper loading state */
+  .project-modal-carousel-container img.loading {
+    background: linear-gradient(90deg, #1A1A1A 25%, #2A2A2A 50%, #1A1A1A 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+  }
+
+  /* Final performance optimization */
+  .project-modal-container,
+  .project-modal,
+  .project-modal-carousel,
+  .project-modal-carousel-container,
+  .project-modal-carousel-container img {
+    will-change: transform, opacity;
+  }
+
+  /* Ensure proper stacking context */
+  .project-modal-container {
+    isolation: isolate;
+  }
+
+  /* Flutter-like smooth animations */
+  .project-modal-container {
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .project-modal {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  }
+
+  .project-link-btn,
+  .tech-tag,
+  .modal-close-btn,
+  .carousel-btn {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Add subtle ripple effect to interactive elements */
+  .project-link-btn:active,
+  .tech-tag:active,
+  .modal-close-btn:active,
+  .carousel-btn:active {
+    transform: scale(0.95);
+  }
+
+  /* Ensure proper contrast ratios */
+  .modal-title {
+    color: #FFC107;
+    font-weight: 600;
+  }
+
+  .project-category-badge {
+    background: #2A2A2A;
+    border: 1px solid #FFC107;
+    color: #FFC107;
+    font-weight: 600;
+  }
+
+  .project-description {
+    color: #B0B0B0;
+    line-height: 1.6;
+  }
+
+  .tech-tag {
+    background: #2A2A2A;
+    border: 1px solid #FFC107;
+    color: #FFC107;
+    font-weight: 500;
+  }
+
+  .project-link-btn {
+    border: 1.5px solid #B0B0B0;
+    color: #B0B0B0;
+    font-weight: 500;
+  }
+
+  .project-link-btn:hover {
+    border-color: #FFC107;
+    color: #FFC107;
+    background: rgba(255, 193, 7, 0.15);
+  }
+
+  /* Ensure proper focus visibility */
+  .modal-close-btn:focus-visible,
+  .carousel-btn:focus-visible,
+  .project-link-btn:focus-visible {
+    outline: 2px solid #FFC107;
+    outline-offset: 3px;
+    box-shadow: 0 0 0 4px rgba(255, 193, 7, 0.2);
+  }
+
+  /* Add subtle animation to project items */
+  .project-item {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .project-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  }
+
+  .project-item .project-item-icon-box {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Ensure proper spacing in modal */
+  .project-modal-info > * {
+    margin-bottom: 12px;
+  }
+
+  .project-modal-info > *:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Add subtle border to carousel */
+  .project-modal-carousel {
+    border: 1px solid rgba(255, 193, 7, 0.2);
+  }
+
+  /* Ensure proper loading state */
+  .project-modal-carousel-container img.loading {
+    background: linear-gradient(90deg, #1A1A1A 25%, #2A2A2A 50%, #1A1A1A 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+  }
+
+  /* Add subtle shadow to modal for depth */
+  .project-modal {
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(255, 193, 7, 0.1);
+  }
+
+  /* Hover effect on modal itself */
+  .project-modal:hover {
+    box-shadow: 
+      0 25px 50px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(255, 193, 7, 0.2);
+  }
+
+  /* Project item hover effects for better UX */
+  .project-item:hover {
+    transform: translateY(-4px);
+    transition: transform 0.3s ease;
+  }
+
+  .project-item a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .project-item .project-img {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+
+  .project-item .project-img::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+  }
+
+  .project-item:hover .project-img::before {
+    opacity: 1;
+  }
+
+  .project-item .project-item-icon-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    z-index: 2;
+    opacity: 0;
+    transition: all 0.3s ease;
+    background: var(--orange-yellow-crayola);
+    padding: 12px;
+    border-radius: 50%;
+    color: var(--eerie-black-2);
+  }
+
+  .project-item:hover .project-item-icon-box {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+
 }
 
 ::-webkit-scrollbar-track {

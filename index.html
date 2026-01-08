@@ -1633,6 +1633,58 @@
 
 
       <!--
+        - #PROJECT DETAIL MODAL
+      -->
+
+      <div class="project-modal-container" data-project-modal-container>
+
+        <div class="overlay" data-project-overlay></div>
+
+        <section class="project-modal">
+
+          <button class="modal-close-btn" data-project-modal-close-btn>
+            <ion-icon name="close-outline"></ion-icon>
+          </button>
+
+          <div class="project-modal-content">
+
+            <!-- Image Carousel -->
+            <div class="project-modal-carousel">
+              <div class="project-modal-carousel-container" data-project-carousel>
+                <!-- Images will be inserted here dynamically -->
+              </div>
+              
+              <button class="carousel-btn carousel-prev" data-carousel-prev>
+                <ion-icon name="chevron-back"></ion-icon>
+              </button>
+              <button class="carousel-btn carousel-next" data-carousel-next>
+                <ion-icon name="chevron-forward"></ion-icon>
+              </button>
+
+              <div class="carousel-counter" data-carousel-counter>1/1</div>
+            </div>
+
+            <!-- Project Info -->
+            <div class="project-modal-info">
+              <h3 class="h3 modal-title" data-project-title></h3>
+              
+              <div class="project-category-badge" data-project-category></div>
+
+              <div class="project-description" data-project-description></div>
+
+              <div class="project-technologies" data-project-technologies></div>
+
+              <div class="project-links" data-project-links></div>
+            </div>
+
+          </div>
+
+        </section>
+
+      </div>
+
+
+      <!--
         - #CONTACT
       -->
 
