@@ -24,14 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
     footer.addEventListener('mouseleave', function() {
       this.style.borderTopColor = 'var(--orange-yellow-crayola)';
     });
-
-    // Click effect on footer
-    footer.addEventListener('click', function() {
-      this.style.transform = 'scale(0.98)';
-      setTimeout(() => {
-        this.style.transform = 'scale(1)';
-      }, 100);
-    });
   }
 
   // Developer name hover effect
