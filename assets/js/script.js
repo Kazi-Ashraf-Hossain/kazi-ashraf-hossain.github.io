@@ -325,12 +325,51 @@ let autoScrollInterval = null;
 // project data mapping (simulating the Flutter data structure)
 // Note: Some project names exist in multiple sections, so we handle them by section context
 const projectDataMap = {
-  // Certification Section Projects
+
+  // Projects Section 
+
+  "carepathnav": {
+    title: "CarePathNav",
+    category: "Applications",
+    description: "A healthcare navigation application designed to assist patients in finding the best care options based on their medical needs and location.",
+    images: ["./assets/images/care nav.PNG"],
+    keywords: ["Healthcare", "Navigation", "Mobile App"],
+    links: [
+      { name: "App Store", url: "#", icon: null },
+      { name: "Google Play", url: "#", icon: null }
+    ]
+  },
+ "face recognition attedence system": {
+    title: "Face Recognition Attendance System",
+    category: "Applications",
+    description: "An attendance system that uses face recognition technology to automatically track and record employee or student attendance.",
+    images: ["./assets/images/face recognition.png"],
+    keywords: ["Face Recognition", "Attendance", "Automation"],
+    links: [
+      { name: "App Store", url: "#", icon: null },
+      { name: "Google Play", url: "#", icon: null }
+    ]
+  },
+   "resonance": {
+    title: "Resonance-Postal Delivery Automation",
+    category: "Applications",
+    description: "An automated postal delivery system for Japan that uses advanced logistics and tracking technologies.",
+    images: ["./assets/images/resonance.png"],
+    keywords: ["Postal Delivery", "Automation"],
+    links: [
+      { name: "App Store", url: "#", icon: null },
+      { name: "Google Play", url: "#", icon: null }
+    ]
+  },
+
+
+
+  // Certification Section 
   "advance automaton & istqb at it training bd": {
     title: "Advance Automaton & ISTQB at It Training BD",
     category: "Professional",
     description: "Comprehensive training program covering advanced automation testing techniques and ISTQB certification preparation. Focuses on practical implementation of testing frameworks and best practices.",
-    images: ["./assets/images/project-1.jpg"],
+    images: ["./assets/images/Advance Automaton & ISTQB at It Training BD.png"],
     keywords: ["Automation", "ISTQB", "Testing", "Selenium"],
     links: [
       { name: "Certificate", url: "#", icon: null },
@@ -348,162 +387,103 @@ const projectDataMap = {
       { name: "Details", url: "#", icon: null }
     ]
   },
-  "java at nasscom it-ites sector skill council": {
-    title: "Java at NASSCOM IT-ITES Sector Skill Council",
-    category: "Professional",
-    description: "Java programming certification from NASSCOM IT-ITES Sector Skill Council. Focuses on core Java concepts, object-oriented programming, and enterprise application development.",
-    images: ["./assets/images/project-9.png"],
-    keywords: ["Java", "Programming", "OOP"],
-    links: [
-      { name: "Certificate", url: "#", icon: null },
-      { name: "Details", url: "#", icon: null }
-    ]
-  },
+ 
   "software testing & quality assurance at bitm": {
     title: "Software Testing & Quality Assurance at BITM",
     category: "Professional",
     description: "Comprehensive software testing and quality assurance training program at BITM. Covers manual testing, test planning, test case design, and defect management.",
-    images: ["./assets/images/project-7.png"],
+    images: ["./assets/images/SQA BITM.PNG"],
     keywords: ["Manual Testing", "QA", "Test Planning"],
     links: [
       { name: "Certificate", url: "#", icon: null },
       { name: "Details", url: "#", icon: null }
     ]
   },
-  "fundo": {
-    title: "Fundo",
+  "digital security essentials": {
+    title: "Digital Security Essentials",
+    category: "Professional",
+    description: "Comprehensive training in digital security fundamentals, covering cybersecurity best practices, threat identification, and secure development principles.",
+    images: ["./assets/images/Digital Security Essentials.png"],
+    keywords: ["Digital Security", "Cybersecurity", "Security Best Practices"],
+    links: [
+      { name: "Certificate", url: "#", icon: null },
+      { name: "Details", url: "#", icon: null }
+    ]
+  },
+
+ "java at nasscom it-ites sector skill council": {
+    title: "Java at NASSCOM IT-ITES Sector Skill Council",
+    category: "Professional",
+    description: "Java programming certification from NASSCOM IT-ITES Sector Skill Council. Focuses on core Java concepts, object-oriented programming, and enterprise application development.",
+    images: ["./assets/images/java.png"],
+    keywords: ["Java", "Programming", "OOP"],
+    links: [
+      { name: "Certificate", url: "#", icon: null },
+      { name: "Details", url: "#", icon: null }
+    ]
+  },
+
+  // Participation Section Projects -------
+
+  "national power & energy hackathon 2017": {
+    title: "National Power & Energy Hackathon 2017",
     category: "Participation",
-    description: "Participation in Fundo project, contributing to development and testing activities.",
+    description: "Participation in National Power & Energy Hackathon 2017.",
     images: ["./assets/images/project-3.jpg"],
     keywords: ["Participation", "Project"],
     links: [
       { name: "Details", url: "#", icon: null }
     ]
   },
-  "dsm.": {
-    title: "DSM.",
+  "iot conference": {
+    title: "IoT Conference",
     category: "Participation",
-    description: "Participation in DSM. project, involved in various development phases.",
-    images: ["./assets/images/project-5.png"],
-    keywords: ["Participation", "Development"],
+    description: "Participation in IoT Conference, contributing to discussions and networking.",
+    images: ["./assets/images/IOT conference.jpg"],
+    keywords: ["Participation", "Conference"],
     links: [
       { name: "Details", url: "#", icon: null }
     ]
   },
-  "metaspark": {
-    title: "MetaSpark",
+  "google msite certification": {
+    title: "Google Msite Certification",
     category: "Participation",
-    description: "Participation in MetaSpark project, contributing to innovative solutions.",
-    images: ["./assets/images/project-6.png"],
-    keywords: ["Participation", "Innovation"],
+    description: "Completion of Google Msite certification, demonstrating expertise in mobile site development.",
+    images: ["./assets/images/google msite certificate.png"],
+    keywords: ["Participation", "Certification"],
     links: [
       { name: "Details", url: "#", icon: null }
     ]
   },
-  "brawlhalla": {
-    title: "Brawlhalla",
-    category: "Others",
-    description: "Brawlhalla project involvement, focusing on game testing and quality assurance.",
-    images: ["./assets/images/project-4.png"],
-    keywords: ["Gaming", "Testing"],
+  "business innovation summit - 2017": {
+    title: "Business Innovation Summit - 2017",
+    category: "Participation",
+    description: "Participation in Business Innovation Summit 2017, engaging with industry leaders and innovators.",
+    images: ["./assets/images/business innovation summit.png"],
+    keywords: ["Participation", "Summit"],
     links: [
       { name: "Details", url: "#", icon: null }
     ]
   },
-  "task manager": {
-    title: "Task Manager",
-    category: "Others",
-    description: "Task Manager application development and testing, focusing on productivity tools.",
-    images: ["./assets/images/project-8.jpg"],
-    keywords: ["Productivity", "Application"],
+
+  "the basic of intellectual property rights": {
+    title: "The Basic of Intellectual Property Rights",
+    category: "Participation",
+    description: "Participation in training on The Basic of Intellectual Property Rights, understanding IP laws and protections.",
+    images: ["./assets/images/The Basic of Intellectual Property Rights.jpg"],
+    keywords: ["Participation", "Training"],
     links: [
       { name: "Details", url: "#", icon: null }
     ]
   },
-  
-  // Regular Projects Section Projects
-  "finance": {
-    title: "Finance",
-    category: "Web development",
-    description: "Financial web application project focusing on secure transactions and real-time data processing.",
-    images: ["./assets/images/project-1.jpg"],
-    keywords: ["Web Development", "Finance", "Security"],
+  // Other Participation achivement
+  "volunteer of iot conference": {
+    title: "Volunteer of IoT Conference",
+    category: "Participation",
+    description: "Volunteered at IoT Conference, assisting with event organization and logistics.",
+    images: ["./assets/images/volunteer of IoT conference.jpg"],
+    keywords: ["Volunteer", "Conference"],
     links: [
-      { name: "Live Demo", url: "#", icon: null },
-      { name: "GitHub", url: "#", icon: null }
-    ]
-  },
-  "orizon": {
-    title: "Orizon",
-    category: "Web development",
-    description: "Orizon project - a modern web application with advanced features and responsive design.",
-    images: ["./assets/images/project-2.png"],
-    keywords: ["Web Development", "Responsive", "Modern"],
-    links: [
-      { name: "Live Demo", url: "#", icon: null },
-      { name: "Details", url: "#", icon: null }
-    ]
-  },
-  "brawlhalla": {
-    title: "Brawlhalla",
-    category: "Applications",
-    description: "Brawlhalla game testing and quality assurance project.",
-    images: ["./assets/images/project-4.png"],
-    keywords: ["Gaming", "Testing", "QA"],
-    links: [
-      { name: "Details", url: "#", icon: null }
-    ]
-  },
-  "dsm.": {
-    title: "DSM.",
-    category: "Web design",
-    description: "DSM. web design project with focus on user experience and visual aesthetics.",
-    images: ["./assets/images/project-5.png"],
-    keywords: ["Web Design", "UI/UX"],
-    links: [
-      { name: "Live Demo", url: "#", icon: null }
-    ]
-  },
-  "metaspark": {
-    title: "MetaSpark",
-    category: "Web design",
-    description: "MetaSpark creative web design project with innovative features.",
-    images: ["./assets/images/project-6.png"],
-    keywords: ["Web Design", "Creative"],
-    links: [
-      { name: "Details", url: "#", icon: null }
-    ]
-  },
-  "summary": {
-    title: "Summary",
-    category: "Web development",
-    description: "Summary web application for data analysis and reporting.",
-    images: ["./assets/images/project-7.png"],
-    keywords: ["Web Development", "Analytics", "Reporting"],
-    links: [
-      { name: "Live Demo", url: "#", icon: null },
-      { name: "GitHub", url: "#", icon: null }
-    ]
-  },
-  "task manager": {
-    title: "Task Manager",
-    category: "Applications",
-    description: "Task Manager application for productivity and project management.",
-    images: ["./assets/images/project-8.jpg"],
-    keywords: ["Productivity", "Application", "Management"],
-    links: [
-      { name: "Live Demo", url: "#", icon: null },
-      { name: "Details", url: "#", icon: null }
-    ]
-  },
-  "arrival": {
-    title: "Arrival",
-    category: "Web development",
-    description: "Arrival project - modern web application with real-time features.",
-    images: ["./assets/images/project-9.png"],
-    keywords: ["Web Development", "Real-time"],
-    links: [
-      { name: "Live Demo", url: "#", icon: null },
       { name: "Details", url: "#", icon: null }
     ]
   }
