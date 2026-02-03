@@ -339,23 +339,34 @@ const projectDataMap = {
       { name: "Google Play", url: "#", icon: null }
     ]
   },
- "face recognition attedence system": {
+  "face recognition attendance system": {
     title: "Face Recognition Attendance System",
     category: "Applications",
-    description: "An attendance system that uses face recognition technology to automatically track and record employee or student attendance.",
-    images: ["./assets/images/face recognition.png"],
-    keywords: ["Face Recognition", "Attendance", "Automation"],
+    description: "An attendance management system utilizing facial recognition technology to automate and streamline the process of tracking employee attendance.",
+    images: ["./assets/images/face-recognition.png"],
+    keywords: ["Facial Recognition", "Attendance", "Automation"],
     links: [
-      { name: "App Store", url: "#", icon: null },
-      { name: "Google Play", url: "#", icon: null }
+      { name: "GitHub", url: "#", icon: null },
+      { name: "Details", url: "#", icon: null }
     ]
   },
-   "resonance": {
-    title: "Resonance-Postal Delivery Automation",
+  "resonance – postal delivery automation for japan": {
+    title: "Resonance – Postal Delivery Automation for Japan",
     category: "Applications",
-    description: "An automated postal delivery system for Japan that uses advanced logistics and tracking technologies.",
+    description: "A postal delivery automation system designed to optimize mail sorting and delivery processes in Japan, enhancing efficiency and accuracy.",
     images: ["./assets/images/resonance.png"],
-    keywords: ["Postal Delivery", "Automation"],
+    keywords: ["Automation", "Postal Service", "Logistics"],
+    links: [
+      { name: "GitHub", url: "#", icon: null },
+      { name: "Details", url: "#", icon: null }
+    ]
+  },
+  "vromonika-one stop tourist guide": {
+    title: "Vromonika - One Stop Tourist Guide",
+    category: "Applications",
+    description: "A comprehensive tourist guide application providing travelers with information on attractions, accommodations, and local experiences in various destinations.",
+    images: ["./assets/images/vromonika.png"],
+    keywords: ["Tourism", "Travel Guide", "Mobile App"],
     links: [
       { name: "App Store", url: "#", icon: null },
       { name: "Google Play", url: "#", icon: null }
@@ -363,6 +374,40 @@ const projectDataMap = {
   },
 
 
+  "hight clearance certificate management system": {
+    title: "High Clearance Certificate Management System",
+    category: "Applications",
+    description: "A certificate management system designed for high-clearance environments, ensuring secure storage, retrieval, and management of sensitive certificates.",
+    images: ["./assets/images/hight clearance certificate management system.png"],
+    keywords: ["Certificate Management", "Security", "High Clearance"],
+    links: [
+      { name: "GitHub", url: "#", icon: null },
+      { name: "Details", url: "#", icon: null }
+    ]
+  },
+  "e-learning management system": {
+    title: "E-Learning Management System",
+    category: "Applications",
+    description: "An integrated e-learning platform designed to facilitate online education, course management, and student progress tracking.",
+    images: ["./assets/images/BTEB.PNG"],
+    keywords: ["E-Learning", "Education", "Management"],
+    links: [
+      { name: "GitHub", url: "#", icon: null },
+      { name: "Details", url: "#", icon: null }
+    ]
+  },
+
+  "innovation monitoring system(cio portal)": {
+    title: "Innovation Monitoring System (CIO Portal)",
+    category: "Applications",
+    description: "An innovation monitoring system designed for CIOs to track and manage innovation initiatives across the organization.",
+    images: ["./assets/images/CIO.PNG"],
+    keywords: ["Innovation", "Monitoring", "CIO Portal"],
+    links: [
+      { name: "App Store", url: "#", icon: null },
+      { name: "Google Play", url: "#", icon: null }
+    ]
+  },
 
   // Certification Section 
   "advance automaton & istqb at it training bd": {
