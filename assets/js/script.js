@@ -362,7 +362,6 @@ const projectDataMap = {
       { name: "Details", url: "#", icon: null }
     ]
   },
-  
   "vromonika – one stop tourist guide": {
     title: "Vromonika – One Stop Tourist Guide",
     category: "Applications",
@@ -375,9 +374,98 @@ const projectDataMap = {
       { name: "Google Play", url: "#", icon: null }
     ]
   },
-
-
-
+  "height clearance certificate management system": {
+    title: "Height Clearance Certificate Management System",
+    category: "Applications",
+    description: "A management system for height clearance certificates, streamlining the issuance, tracking, and verification processes for aviation safety compliance.",
+    images: ["./assets/images/caab.png"],
+    keywords: ["Aviation", "Certificate Management", "Safety Compliance"],
+    links: [
+      { name: "Details", url: "#", icon: null }
+    ]
+  },
+  "e-learning management system- bteb": {
+    title: "E-Learning Management System- BTEB",
+    category: "Applications",
+    description: "An e-learning management system developed for BTEB, facilitating online education and training with features for course management, assessments, and student tracking.",
+    images: ["./assets/images/bteb.png"],
+    keywords: ["E-Learning", "Education", "Online Training"],
+    links: [
+      { name: "Details", url: "#", icon: null }
+    ]
+  },
+  "rhd pmis – communication and employee data management": {
+    title: "RHD PMIS – Communication and Employee Data Management",
+    category: "Applications",
+    description: "A project management information system for RHD, designed to enhance communication and manage employee data effectively within the organization.",
+    images: ["./assets/images/rhd.png"],
+    keywords: ["Project Management", "Information System", "Employee Data"],
+    links: [
+      { name: "Details", url: "#", icon: null }
+    ]
+  },
+  "grypas hris": {
+    title: "GRYPAS HRIS",
+    category: "Web Applications",
+    description: "A secure password management application that helps users store and manage their passwords safely with encryption and easy access features.",
+    images: ["./assets/images/grypas.png"],
+    keywords: ["Password Management", "Security", "Encryption"],
+    links: [
+      { name: "App Store", url: "#", icon: null },
+      { name: "Google Play", url: "#", icon: null }
+    ]
+  },
+  "bard – unified erp ecosystem": {
+    title: "BARD – Unified ERP Ecosystem",
+    category: "Web Applications",
+    description: "A comprehensive ERP ecosystem solution that integrates various business functions into a unified platform for streamlined operations.",
+    images: ["./assets/images/bard.png"],
+    keywords: ["ERP", "Unified Platform", "Business Integration"],
+    links: [
+      { name: "Details", url: "#", icon: null }
+    ]
+  },
+  "vromonika": {
+    title: "VROMONIKA",
+    category: "Web Applications",
+    description: "A web-based tourist guide platform that offers detailed information on travel destinations, accommodations, and local attractions.",
+    images: ["./assets/images/vromonika-web.png"],
+    keywords: ["Tourism", "Travel Guide", "Web App"],
+    links: [
+      { name: "Details", url: "#", icon: null }
+    ]
+  },
+  "height clearance certificate managemant system- for caab": {
+    title: "Height Clearance Certificate Managemant System- For CAAB",
+    category: "Web Applications",
+    description: "A web application for managing height clearance certificates for CAAB, ensuring compliance with aviation safety standards.",
+    images: ["./assets/images/caab-web.png"],
+    keywords: ["Aviation", "Certificate Management", "Web App"],
+    links: [
+      { name: "Details", url: "#", icon: null }
+    ]
+  },
+  "biam tms –manage training programs": {
+    title: "BIAM TMS –Manage Training Programs",
+    category: "Web Applications",
+    description: "A training management system for BIAM that facilitates the organization and administration of training programs and sessions.",
+    images: ["./assets/images/biam.png"],
+    keywords: ["Training Management", "Web App", "Program Administration"],
+    links: [
+      { name: "Details", url: "#", icon: null }
+    ]
+  },
+  "innovation monitoring system (cio portal) – undp project": {
+    title: "Innovation Monitoring System (CIO Portal) – UNDP Project",
+    category: "Web Applications",
+    description: "A monitoring system developed for the UNDP project, providing a portal for tracking innovation initiatives and project progress.",
+    images: ["./assets/images/cio.png"],
+    keywords: ["Innovation Monitoring", "CIO Portal", "UNDP"],
+    links: [
+      { name: "Details", url: "#", icon: null }
+    ]
+  },
+ 
 
   // Certification Section 
   "advance automaton & istqb at it training bd": {
