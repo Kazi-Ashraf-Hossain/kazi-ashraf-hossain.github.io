@@ -326,7 +326,7 @@ let autoScrollInterval = null;
 // Note: Some project names exist in multiple sections, so we handle them by section context
 const projectDataMap = {
 
-  // Projects Section 
+  // Projects Section - Application
 
   "carepathnav": {
     title: "CarePathNav",
@@ -339,6 +339,7 @@ const projectDataMap = {
       { name: "Google Play", url: "#", icon: null }
     ]
   },
+
   "face recognition attendance system": {
     title: "Face Recognition Attendance System",
     category: "Applications",
@@ -361,11 +362,13 @@ const projectDataMap = {
       { name: "Details", url: "#", icon: null }
     ]
   },
-  "vromonika-one stop tourist guide": {
-    title: "Vromonika - One Stop Tourist Guide",
+  
+  "vromonika – one stop tourist guide": {
+    title: "Vromonika – One Stop Tourist Guide",
     category: "Applications",
-    description: "A comprehensive tourist guide application providing travelers with information on attractions, accommodations, and local experiences in various destinations.",
-    images: ["./assets/images/vromonika.png"],
+    description: "A comprehensive tourist guide application that provides travelers with information on attractions, accommodations, and local experiences in a user-friendly interface.",
+    images: ["./assets/images/vromonika.png"]
+,
     keywords: ["Tourism", "Travel Guide", "Mobile App"],
     links: [
       { name: "App Store", url: "#", icon: null },
@@ -374,40 +377,7 @@ const projectDataMap = {
   },
 
 
-  "hight clearance certificate management system": {
-    title: "High Clearance Certificate Management System",
-    category: "Applications",
-    description: "A certificate management system designed for high-clearance environments, ensuring secure storage, retrieval, and management of sensitive certificates.",
-    images: ["./assets/images/hight clearance certificate management system.png"],
-    keywords: ["Certificate Management", "Security", "High Clearance"],
-    links: [
-      { name: "GitHub", url: "#", icon: null },
-      { name: "Details", url: "#", icon: null }
-    ]
-  },
-  "e-learning management system": {
-    title: "E-Learning Management System",
-    category: "Applications",
-    description: "An integrated e-learning platform designed to facilitate online education, course management, and student progress tracking.",
-    images: ["./assets/images/BTEB.PNG"],
-    keywords: ["E-Learning", "Education", "Management"],
-    links: [
-      { name: "GitHub", url: "#", icon: null },
-      { name: "Details", url: "#", icon: null }
-    ]
-  },
 
-  "innovation monitoring system(cio portal)": {
-    title: "Innovation Monitoring System (CIO Portal)",
-    category: "Applications",
-    description: "An innovation monitoring system designed for CIOs to track and manage innovation initiatives across the organization.",
-    images: ["./assets/images/CIO.PNG"],
-    keywords: ["Innovation", "Monitoring", "CIO Portal"],
-    links: [
-      { name: "App Store", url: "#", icon: null },
-      { name: "Google Play", url: "#", icon: null }
-    ]
-  },
 
   // Certification Section 
   "advance automaton & istqb at it training bd": {
@@ -898,35 +868,38 @@ function openProjectModal(element) {
 
 // add click event to all project items
 for (let i = 0; i < projectItems.length; i++) {
-  projectItems[i].addEventListener("click", function (e) {
-    e.preventDefault();
-    
-    // Get the project title from the element
-    const titleElement = this.querySelector(".project-title");
-    if (!titleElement) return;
-    
-    const projectTitle = titleElement.textContent;
-    
-    // Prevent opening multiple modals
-    if (projectModalContainer.classList.contains("active")) {
-      // Check if we're trying to open the same project
-      if (currentProjectData && currentProjectData.title === projectTitle) {
-        // Same project, just close the modal
+  const link = projectItems[i].querySelector("a");
+  if (link) {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      // Get the project title from the element
+      const titleElement = this.parentElement.querySelector(".project-title");
+      if (!titleElement) return;
+
+      const projectTitle = titleElement.textContent;
+
+      // Prevent opening multiple modals
+      if (projectModalContainer.classList.contains("active")) {
+        // Check if we're trying to open the same project
+        if (currentProjectData && currentProjectData.title === projectTitle) {
+          // Same project, just close the modal
+          projectModalFunc();
+          return;
+        }
+
+        // Different project, close current and open new one
         projectModalFunc();
+        setTimeout(() => {
+          openProjectModal(this.parentElement);
+        }, 350);
         return;
       }
-      
-      // Different project, close current and open new one
-      projectModalFunc();
-      setTimeout(() => {
-        openProjectModal(this);
-      }, 350);
-      return;
-    }
-    
-    // Open modal normally
-    openProjectModal(this);
-  });
+
+      // Open modal normally
+      openProjectModal(this.parentElement);
+    });
+  }
 }
 
 // add click event to modal close button
