@@ -465,7 +465,7 @@ const projectDataMap = {
       { name: "Details", url: "#", icon: null }
     ]
   },
-        
+               
   // Certification Section 
   "advance automaton & istqb at it training bd": {
     title: "Advance Automaton & ISTQB at It Training BD",
