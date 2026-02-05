@@ -466,7 +466,6 @@ const projectDataMap = {
     ]
   },
  
-
   // Certification Section 
   "advance automaton & istqb at it training bd": {
     title: "Advance Automaton & ISTQB at It Training BD",
