@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const experiencePill = document.querySelector('.experience-pill');
   if (experiencePill) {
     experiencePill.addEventListener('mouseenter', function() {
-      this.title = '3+ years of professional experience in Software Quality Assurance';
+      this.title = '4+ years of professional experience in Software Quality Assurance';
     });
   }
 });
